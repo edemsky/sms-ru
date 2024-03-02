@@ -1,8 +1,8 @@
 {
-    "name": "laravel-notification-channels/smsc-ru",
-    "description": "SmscRu Notifications channel for Laravel 5.3.",
-    "keywords": ["laravel", "notifications", "smscentre", "smsc", "СМС-Центр"],
-    "homepage": "https://github.com/laravel-notification-channels/smsc-ru",
+    "name": "edemsky/sms-ru",
+    "description": "Sms Notifications channel for Laravel 5.3.",
+    "keywords": ["laravel", "notifications", "smscentre", "sms"],
+    "homepage": "https://github.com/edemsky/sms-ru",
     "license": "MIT",
     "authors": [
         {
