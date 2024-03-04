@@ -14,7 +14,7 @@ class SmscRuApi
     protected $client;
 
     /** @var string */
-    protected $endpoint = 'https://smsc.ru/sys/send.php';
+    protected $endpoint = 'https://a2p-sms-https.beeline.ru/proto/http/';
 
     /** @var string */
     protected $login;
@@ -30,6 +30,10 @@ class SmscRuApi
 
     protected $action = 'post_sms';
     protected $charset = 'utf-8';
+    protected $headers = ['headers' => [
+        'Content-Encoding' => 'gzip',
+        'Content-Type' => 'application/x-www-form-urlencoded; charset=utf-8',
+    ]];
 
     public function __construct(array $config)
     {
@@ -57,10 +61,11 @@ class SmscRuApi
             'user' => $this->login,
             'pass' => $this->secret,
             'sender' => $this->sender,
-            'fmt' => self::FORMAT_JSON,
         ];
 
-        $params = \array_merge($base, \array_filter($params), $this->extra);
+        $params['form_params'] = \array_merge($base, \array_filter($params));
+
+        $params = \array_merge($params, $this->extra, $this->headers);
 
         try {
             $response = $this->client->request('POST', $this->endpoint, $params);

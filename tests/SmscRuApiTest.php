@@ -24,10 +24,10 @@ class SmscRuApiTest extends TestCase
     public function test_it_has_config_with_custom_endpoint(): void
     {
         $smsc = $this->getExtendedSmscRuApi([
-            'host' => $host = 'https://smsc.kz/',
+            'host' => $host = 'https://a2p-sms-https.beeline.ru/proto/http/',
         ]);
 
-        $this->assertEquals('https://smsc.kz/', $smsc->getEndpoint());
+        $this->assertEquals('https://a2p-sms-https.beeline.ru/proto/http/', $smsc->getEndpoint());
     }
 
     private function getExtendedSmscRuApi(array $config)
