@@ -1,12 +1,13 @@
 <?php
 
-namespace NotificationChannels\SmscRu;
+namespace NotificationChannels\SmsBee;
 
 use GuzzleHttp\Client as HttpClient;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Arr;
-use NotificationChannels\SmscRu\Exceptions\CouldNotSendNotification;
+use NotificationChannels\SmsBee\Exceptions\CouldNotSendNotification;
 
-class SmscRuApi
+class SmsApi
 {
     public const FORMAT_JSON = 3;
 
@@ -46,17 +47,28 @@ class SmscRuApi
 
         $this->extra = Arr::get($config, 'extra', []);
 
+        $this->setContentTypeEncoding($this->charset);
+
         $this->client = new HttpClient([
             'timeout' => 5,
             'connect_timeout' => 5,
         ]);
     }
 
+    protected function setContentTypeEncoding(string $encoding = 'utf-8')
+    {
+        $contentType = Arr::get($this->headers, 'headers.Content-Type', $this->headers) . $encoding;
+        Arr::set($this->headers, 'headers.Content-Type', $contentType);
+    }
 
+
+    /**
+     * @throws CouldNotSendNotification
+     * @throws GuzzleException
+     */
     public function send($params)
     {
         $base = [
-            'charset' => 'utf-8',
             "action" => $this->action,
             'user' => $this->login,
             'pass' => $this->secret,

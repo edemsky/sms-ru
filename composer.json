@@ -6,10 +6,10 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "JhaoDa",
+            "name": "Michael Edemsky",
             "role": "Developer",
-            "email": "jhaoda@gmail.com",
-            "homepage": "https://github.com/jhaoda"
+            "email": "edemsky.m@gnail.com",
+            "homepage": "https://github.com/edemsky"
         }
     ],
     "require": {
@@ -27,12 +27,12 @@
     },
     "autoload": {
         "psr-4": {
-            "NotificationChannels\\SmscRu\\": "src"
+            "NotificationChannels\\SmsBee\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "NotificationChannels\\SmscRu\\Test\\": "tests"
+            "NotificationChannels\\SmsBee\\Test\\": "tests"
         }
     },
     "config": {
@@ -44,7 +44,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "NotificationChannels\\SmscRu\\SmscRuServiceProvider"
+                "SmsServiceProvider"
             ]
         }
     }

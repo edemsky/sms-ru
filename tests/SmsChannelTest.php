@@ -1,24 +1,24 @@
 <?php
 
-namespace NotificationChannels\SmscRu\Test;
+namespace NotificationChannels\SmsBee\Test;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Notifications\Notification;
 use Mockery as M;
-use NotificationChannels\SmscRu\SmscRuApi;
-use NotificationChannels\SmscRu\SmscRuChannel;
-use NotificationChannels\SmscRu\SmscRuMessage;
+use NotificationChannels\SmsBee\SmsApi;
+use NotificationChannels\SmsBee\SmsChannel;
+use NotificationChannels\SmsBee\SmsMessage;
 use PHPUnit\Framework\TestCase;
 
-class SmscRuChannelTest extends TestCase
+class SmsChannelTest extends TestCase
 {
-    /** @var SmscRuApi|M\MockInterface */
+    /** @var SmsApi|M\MockInterface */
     private $smsc;
 
-    /** @var SmscRuMessage */
+    /** @var SmsMessage */
     private $message;
 
-    /** @var SmscRuChannel */
+    /** @var SmsChannel */
     private $channel;
 
     /** @var \DateTime */
@@ -26,13 +26,13 @@ class SmscRuChannelTest extends TestCase
 
     public function setUp(): void
     {
-        $this->smsc = M::mock(SmscRuApi::class, [
+        $this->smsc = M::mock(SmsApi::class, [
             'login' => 'test',
             'secret' => 'test',
             'sender' => 'John_Doe',
         ]);
-        $this->channel = new SmscRuChannel($this->smsc);
-        $this->message = M::mock(SmscRuMessage::class);
+        $this->channel = new SmsChannel($this->smsc);
+        $this->message = M::mock(SmsMessage::class);
     }
 
     public function tearDown(): void
@@ -45,8 +45,8 @@ class SmscRuChannelTest extends TestCase
         $this->smsc->shouldReceive('send')
             ->once()
             ->with([
-                'phones'  => '+1234567890',
-                'mes'     => 'hello',
+                'target'  => '+1234567890',
+                'message'     => 'hello',
                 'sender'  => 'John_Doe',
             ]);
 
@@ -60,8 +60,8 @@ class SmscRuChannelTest extends TestCase
         $this->smsc->shouldReceive('send')
             ->once()
             ->with([
-                'phones'  => '+1234567890',
-                'mes'     => 'hello',
+                'target'  => '+1234567890',
+                'message'     => 'hello',
                 'sender'  => 'John_Doe',
                 'time'    => '0'.self::$sendAt->getTimestamp(),
             ]);
@@ -83,8 +83,8 @@ class SmscRuChannelTest extends TestCase
         $this->smsc->shouldReceive('send')
             ->once()
             ->with([
-                'phones'  => '+1234567890,+0987654321,+1234554321',
-                'mes'     => 'hello',
+                'target'  => '+1234567890,+0987654321,+1234554321',
+                'message'     => 'hello',
                 'sender'  => 'John_Doe',
             ]);
 
@@ -124,7 +124,7 @@ class TestNotification extends Notification
 {
     public function toSmscRu()
     {
-        return SmscRuMessage::create('hello')->from('John_Doe');
+        return SmsMessage::create('hello')->from('John_Doe');
     }
 }
 
@@ -132,8 +132,8 @@ class TestNotificationWithSendAt extends Notification
 {
     public function toSmscRu()
     {
-        return SmscRuMessage::create('hello')
+        return SmsMessage::create('hello')
             ->from('John_Doe')
-            ->sendAt(SmscRuChannelTest::$sendAt);
+            ->sendAt(SmsChannelTest::$sendAt);
     }
 }

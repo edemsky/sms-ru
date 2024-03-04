@@ -1,11 +1,11 @@
 <?php
 
-namespace NotificationChannels\SmscRu\Test;
+namespace NotificationChannels\SmsBee\Test;
 
-use NotificationChannels\SmscRu\SmscRuApi;
+use NotificationChannels\SmsBee\SmsApi;
 use PHPUnit\Framework\TestCase;
 
-class SmscRuApiTest extends TestCase
+class SmsApiTest extends TestCase
 {
     public function test_it_has_config_with_default_endpoint(): void
     {
@@ -18,7 +18,7 @@ class SmscRuApiTest extends TestCase
         $this->assertEquals($login, $smsc->getLogin());
         $this->assertEquals($secret, $smsc->getSecret());
         $this->assertEquals($sender, $smsc->getSender());
-        $this->assertEquals('https://smsc.ru/sys/send.php', $smsc->getEndpoint());
+        $this->assertEquals('https://a2p-sms-https.beeline.ru/proto/http/', $smsc->getEndpoint());
     }
 
     public function test_it_has_config_with_custom_endpoint(): void
@@ -32,7 +32,7 @@ class SmscRuApiTest extends TestCase
 
     private function getExtendedSmscRuApi(array $config)
     {
-        return new class($config) extends SmscRuApi
+        return new class($config) extends SmsApi
         {
             public function getEndpoint(): string
             {

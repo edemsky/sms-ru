@@ -1,8 +1,8 @@
 <?php
 
-namespace NotificationChannels\SmscRu;
+namespace NotificationChannels\SmsBee;
 
-class SmscRuMessage
+class SmsMessage
 {
     /**
      * The phone number the message should be sent from.

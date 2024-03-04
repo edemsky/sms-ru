@@ -1,16 +1,16 @@
 <?php
 
-namespace NotificationChannels\SmscRu;
+namespace NotificationChannels\SmsBee;
 
 use Illuminate\Notifications\Notification;
-use NotificationChannels\SmscRu\Exceptions\CouldNotSendNotification;
+use NotificationChannels\SmsBee\Exceptions\CouldNotSendNotification;
 
-class SmscRuChannel
+class SmsChannel
 {
-    /** @var SmscRuApi */
+    /** @var SmsApi */
     protected $smsc;
 
-    public function __construct(SmscRuApi $smsc)
+    public function __construct(SmsApi $smsc)
     {
         $this->smsc = $smsc;
     }
@@ -34,7 +34,7 @@ class SmscRuChannel
         $message = $notification->{'toSmscRu'}($notifiable);
 
         if (\is_string($message)) {
-            $message = new SmscRuMessage($message);
+            $message = new SmsMessage($message);
         }
 
         return $this->sendMessage($to, $message);
@@ -59,7 +59,7 @@ class SmscRuChannel
         return \is_array($to) ? $to : [$to];
     }
 
-    protected function sendMessage($recipients, SmscRuMessage $message)
+    protected function sendMessage($recipients, SmsMessage $message)
     {
         if (\mb_strlen($message->content) > 800) {
             throw CouldNotSendNotification::contentLengthLimitExceeded();

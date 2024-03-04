@@ -1,13 +1,8 @@
 # Smsc notifications channel for Laravel 5.3+
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/laravel-notification-channels/smsc-ru.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/smsc-ru)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/laravel-notification-channels/smsc-ru.svg?style=flat-square)](https://packagist.org/packages/edemsky/sms-ru)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Build Status](https://img.shields.io/travis/laravel-notification-channels/smsc-ru/master.svg?style=flat-square)](https://travis-ci.org/laravel-notification-channels/smsc-ru)
-[![StyleCI](https://styleci.io/repos/65589451/shield)](https://styleci.io/repos/65589451)
-[![SensioLabsInsight](https://img.shields.io/sensiolabs/i/aceefe27-ba5a-49d7-9064-bc3abea0abeb.svg?style=flat-square)](https://insight.sensiolabs.com/projects/aceefe27-ba5a-49d7-9064-bc3abea0abeb)
-[![Quality Score](https://img.shields.io/scrutinizer/g/laravel-notification-channels/smsc-ru.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/smsc-ru)
-[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/laravel-notification-channels/smsc-ru/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/smsc-ru/?branch=master)
-[![Total Downloads](https://img.shields.io/packagist/dt/laravel-notification-channels/smsc-ru.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/smsc-ru)
+[![Total Downloads](https://img.shields.io/packagist/dt/laravel-notification-channels/smsc-ru.svg?style=flat-square)](https://packagist.org/packages/edemsky/sms-ru)
 
 This package makes it easy to send notifications using [smsc.ru](https://smsc.ru) (aka СМС–Центр) with Laravel 5.3+.
 
@@ -36,15 +31,16 @@ composer require laravel-notification-channels/smsc-ru
 If you're using Laravel 5.x you'll also need to specify a version constraint:
 
 ```bash
-composer require laravel-notification-channels/smsc-ru -v 2.0.3
+composer require edemsky/sms-ru
 ```
 
 The service provider gets loaded automatically. Or you can do this manually:
+
 ```php
 // config/app.php
 'providers' => [
     ...
-    NotificationChannels\SmscRu\SmscRuServiceProvider::class,
+    NotificationChannels\SmsBee\SmsServiceProvider::class,
 ],
 ```
 
@@ -55,7 +51,7 @@ Add your SmscRu login, secret key (hashed password) and default sender name (or 
 ```php
 // config/services.php
 ...
-'smscru' => [
+'sms' => [
     'login'  => env('SMSCRU_LOGIN'),
     'secret' => env('SMSCRU_SECRET'),
     'sender' => 'John_Doe',
@@ -79,7 +75,7 @@ SMSCRU_HOST=http://www1.smsc.kz/
 ```php
 // config/services.php
 ...
-'smscru' => [
+'sms' => [
     ...
     'host' => env('SMSCRU_HOST'),
     ...
@@ -93,19 +89,19 @@ You can use the channel in your `via()` method inside the notification:
 
 ```php
 use Illuminate\Notifications\Notification;
-use NotificationChannels\SmscRu\SmscRuMessage;
-use NotificationChannels\SmscRu\SmscRuChannel;
+use NotificationChannels\SmsBee\SmsMessage;
+use NotificationChannels\SmsBee\SmsChannel;
 
 class AccountApproved extends Notification
 {
     public function via($notifiable)
     {
-        return [SmscRuChannel::class];
+        return [SmsChannel::class];
     }
 
     public function toSmscRu($notifiable)
     {
-        return SmscRuMessage::create("Task #{$notifiable->id} is complete!");
+        return SmsMessage::create("Task #{$notifiable->id} is complete!");
     }
 }
 ```
