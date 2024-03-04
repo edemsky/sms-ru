@@ -44,7 +44,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "SmsServiceProvider"
+                "NotificationChannels\\SmsBee\\SmsServiceProvider"
             ]
         }
     }
