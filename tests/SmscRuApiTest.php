@@ -27,7 +27,7 @@ class SmscRuApiTest extends TestCase
             'host' => $host = 'https://smsc.kz/',
         ]);
 
-        $this->assertEquals('https://smsc.kz/sys/send.php', $smsc->getEndpoint());
+        $this->assertEquals('https://smsc.kz/', $smsc->getEndpoint());
     }
 
     private function getExtendedSmscRuApi(array $config)
