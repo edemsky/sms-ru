@@ -90,7 +90,7 @@ class SmsApi
 
             return $response;
         } catch (\DomainException $exception) {
-            throw CouldNotSendNotification::smscRespondedWithAnError($exception);
+            throw CouldNotSendNotification::smsRespondedWithAnError($exception);
         } catch (\Exception $exception) {
             throw CouldNotSendNotification::couldNotCommunicateWithSmsProvider($exception);
         }

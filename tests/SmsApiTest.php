@@ -9,7 +9,7 @@ class SmsApiTest extends TestCase
 {
     public function test_it_has_config_with_default_endpoint(): void
     {
-        $smsc = $this->getExtendedSmscRuApi([
+        $smsc = $this->getExtendedSmsApi([
             'login'  => $login = 'login',
             'secret' => $secret = 'secret',
             'sender' => $sender = 'sender',
@@ -23,14 +23,14 @@ class SmsApiTest extends TestCase
 
     public function test_it_has_config_with_custom_endpoint(): void
     {
-        $smsc = $this->getExtendedSmscRuApi([
+        $smsc = $this->getExtendedSmsApi([
             'host' => $host = 'https://a2p-sms-https.beeline.ru/proto/http/',
         ]);
 
         $this->assertEquals('https://a2p-sms-https.beeline.ru/proto/http/', $smsc->getEndpoint());
     }
 
-    private function getExtendedSmscRuApi(array $config)
+    private function getExtendedSmsApi(array $config)
     {
         return new class($config) extends SmsApi
         {

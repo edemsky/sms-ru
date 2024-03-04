@@ -74,7 +74,7 @@ class SmsChannelTest extends TestCase
         $this->smsc->shouldNotReceive('send');
 
         $this->channel->send(
-            new TestNotifiableWithoutRouteNotificationForSmscru(), new TestNotification()
+            new TestNotifiableWithoutRouteNotificationForSms(), new TestNotification()
         );
     }
 
@@ -98,15 +98,15 @@ class TestNotifiable
 
     // Laravel v5.6+ passes the notification instance here
     // So we need to add `Notification $notification` argument to check it when this project stops supporting < 5.6
-    public function routeNotificationForSmscru()
+    public function routeNotificationForSms()
     {
         return '+1234567890';
     }
 }
 
-class TestNotifiableWithoutRouteNotificationForSmscru extends TestNotifiable
+class TestNotifiableWithoutRouteNotificationForSms extends TestNotifiable
 {
-    public function routeNotificationForSmscru()
+    public function routeNotificationForSms()
     {
         return false;
     }
@@ -114,7 +114,7 @@ class TestNotifiableWithoutRouteNotificationForSmscru extends TestNotifiable
 
 class TestNotifiableWithManyPhones extends TestNotifiable
 {
-    public function routeNotificationForSmscru()
+    public function routeNotificationForSms()
     {
         return ['+1234567890', '+0987654321', '+1234554321'];
     }

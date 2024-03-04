@@ -26,7 +26,7 @@ class CouldNotSendNotification extends Exception
      *
      * @return static
      */
-    public static function smscRespondedWithAnError(DomainException $exception): self
+    public static function smsRespondedWithAnError(DomainException $exception): self
     {
         return new static(
             "Sms provider responded with an error '{$exception->getCode()}: {$exception->getMessage()}'",

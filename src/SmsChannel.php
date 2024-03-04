@@ -31,7 +31,7 @@ class SmsChannel
             return null;
         }
 
-        $message = $notification->{'toSmscRu'}($notifiable);
+        $message = $notification->{'toSms'}($notifiable);
 
         if (\is_string($message)) {
             $message = new SmsMessage($message);
@@ -50,7 +50,7 @@ class SmsChannel
      */
     protected function getRecipients($notifiable, Notification $notification): array
     {
-        $to = $notifiable->routeNotificationFor('smscru', $notification);
+        $to = $notifiable->routeNotificationFor('sms', $notification);
 
         if (empty($to)) {
             return [];
