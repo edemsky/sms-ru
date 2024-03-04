@@ -66,8 +66,8 @@ class SmscRuChannel
         }
 
         $params = [
-            'phones'  => \implode(',', $recipients),
-            'mes'     => $message->content,
+            'target'  => \implode(',', $recipients),
+            'message'     => $message->content,
             'sender'  => $message->from,
         ];
 
