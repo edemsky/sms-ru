@@ -33,7 +33,7 @@ class SmsApi
     protected $charset = 'utf-8';
     protected $headers = ['headers' => [
         'Content-Encoding' => 'gzip',
-        'Content-Type' => 'application/x-www-form-urlencoded; charset=utf-8',
+        'Content-Type' => 'application/x-www-form-urlencoded; charset=',
     ]];
 
     public function __construct(array $config)
@@ -92,7 +92,7 @@ class SmsApi
         } catch (\DomainException $exception) {
             throw CouldNotSendNotification::smscRespondedWithAnError($exception);
         } catch (\Exception $exception) {
-            throw CouldNotSendNotification::couldNotCommunicateWithSmsc($exception);
+            throw CouldNotSendNotification::couldNotCommunicateWithSmsProvider($exception);
         }
     }
 }
