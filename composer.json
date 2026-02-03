@@ -1,6 +1,6 @@
 {
     "name": "edemsky/sms-ru",
-    "description": "Sms Notifications channel for Laravel 5.3.",
+    "description": "SMS notifications channel for Laravel 10-12.",
     "keywords": ["laravel", "notifications", "smscentre", "sms"],
     "homepage": "https://github.com/edemsky/sms-ru",
     "license": "MIT",
@@ -13,17 +13,17 @@
         }
     ],
     "require": {
-        "php": ">=7.2",
+        "php": "^8.1 || ^8.2 || ^8.3 || ^8.4",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "guzzlehttp/guzzle": "^7.0.1",
-        "illuminate/queue": "5.1 - 5.8|^6.0|^7.0|^8.0|^9.0|^10.0",
-        "illuminate/notifications": "5.1 - 5.8|^6.0|^7.0|^8.0|^9.0|^10.0",
-        "illuminate/support": "5.1 - 5.8|^6.0|^7.0|^8.0|^9.0|^10.0"
+        "guzzlehttp/guzzle": "^7.5",
+        "illuminate/queue": "^10.0|^11.0|^12.0",
+        "illuminate/notifications": "^10.0|^11.0|^12.0",
+        "illuminate/support": "^10.0|^11.0|^12.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.3",
-        "mockery/mockery": "^1.3.1"
+        "phpunit/phpunit": "^10.5 || ^11.0",
+        "mockery/mockery": "^1.6"
     },
     "autoload": {
         "psr-4": {

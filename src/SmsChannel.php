@@ -31,7 +31,11 @@ class SmsChannel
             return null;
         }
 
-        $message = $notification->{'toSms'}($notifiable);
+        if (! method_exists($notification, 'toSms')) {
+            throw new CouldNotSendNotification('Notification is missing toSms() method.');
+        }
+
+        $message = $notification->toSms($notifiable);
 
         if (\is_string($message)) {
             $message = new SmsMessage($message);

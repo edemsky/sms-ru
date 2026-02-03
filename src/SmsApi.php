@@ -39,7 +39,7 @@ class SmsApi
     public function __construct(array $config)
     {
         $this->action = Arr::get($config, 'action', $this->action);
-        $this->charset  = Arr::get($config, 'charset ', $this->charset);
+        $this->charset  = Arr::get($config, 'charset', $this->charset);
         $this->login = Arr::get($config, 'login');
         $this->secret = Arr::get($config, 'secret');
         $this->sender = Arr::get($config, 'sender');

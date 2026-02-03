@@ -90,15 +90,23 @@ class SmsChannelTest extends TestCase
 
         $this->channel->send(new TestNotifiableWithManyPhones(), new TestNotification());
     }
+
+    public function test_it_throws_when_notification_has_no_to_sms_method(): void
+    {
+        $this->smsc->shouldNotReceive('send');
+
+        $this->expectException(\NotificationChannels\SmsBee\Exceptions\CouldNotSendNotification::class);
+
+        $this->channel->send(new TestNotifiable(), new TestNotificationWithoutToSms());
+    }
 }
 
 class TestNotifiable
 {
     use Notifiable;
 
-    // Laravel v5.6+ passes the notification instance here
-    // So we need to add `Notification $notification` argument to check it when this project stops supporting < 5.6
-    public function routeNotificationForSms()
+    // Laravel may pass the notification instance here.
+    public function routeNotificationForSms(Notification $notification = null)
     {
         return '+1234567890';
     }
@@ -106,7 +114,7 @@ class TestNotifiable
 
 class TestNotifiableWithoutRouteNotificationForSms extends TestNotifiable
 {
-    public function routeNotificationForSms()
+    public function routeNotificationForSms(Notification $notification = null)
     {
         return false;
     }
@@ -114,7 +122,7 @@ class TestNotifiableWithoutRouteNotificationForSms extends TestNotifiable
 
 class TestNotifiableWithManyPhones extends TestNotifiable
 {
-    public function routeNotificationForSms()
+    public function routeNotificationForSms(Notification $notification = null)
     {
         return ['+1234567890', '+0987654321', '+1234554321'];
     }
@@ -122,7 +130,7 @@ class TestNotifiableWithManyPhones extends TestNotifiable
 
 class TestNotification extends Notification
 {
-    public function toSmscRu()
+    public function toSms($notifiable)
     {
         return SmsMessage::create('hello')->from('John_Doe');
     }
@@ -130,10 +138,14 @@ class TestNotification extends Notification
 
 class TestNotificationWithSendAt extends Notification
 {
-    public function toSmscRu()
+    public function toSms($notifiable)
     {
         return SmsMessage::create('hello')
             ->from('John_Doe')
             ->sendAt(SmsChannelTest::$sendAt);
     }
+}
+
+class TestNotificationWithoutToSms extends Notification
+{
 }
