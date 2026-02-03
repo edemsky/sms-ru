@@ -1,10 +1,15 @@
-# Smsc notifications channel for Laravel 5.3+
+# Smsc notifications channel for Laravel 10-12
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/laravel-notification-channels/smsc-ru.svg?style=flat-square)](https://packagist.org/packages/edemsky/sms-ru)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Total Downloads](https://img.shields.io/packagist/dt/laravel-notification-channels/smsc-ru.svg?style=flat-square)](https://packagist.org/packages/edemsky/sms-ru)
 
-This package makes it easy to send notifications with Laravel 5.3+.
+This package makes it easy to send notifications with Laravel 10-12.
+
+Supported versions:
+
+- Laravel 10-12
+- PHP 8.1-8.4
 
 ## Contents
 
@@ -23,12 +28,6 @@ This package makes it easy to send notifications with Laravel 5.3+.
 ## Installation
 
 Install this package with Composer:
-
-```bash
-composer require require edemsky/sms-ru
-```
-
-If you're using Laravel 5.x you'll also need to specify a version constraint:
 
 ```bash
 composer require edemsky/sms-ru
@@ -55,6 +54,7 @@ Add your SmscRu login, secret key (hashed password) and default sender name (or 
     'login'  => env('SMS_LOGIN'),
     'secret' => env('SMS_SECRET'),
     'sender' => 'John_Doe',
+    'charset' => 'utf-8',
     'extra'  => [
         // any other API parameters
         // 'tinyurl' => 1
@@ -106,11 +106,11 @@ class AccountApproved extends Notification
 }
 ```
 
-In your notifiable model, make sure to include a `routeNotificationForSmscru()` method, which returns a phone number
+In your notifiable model, make sure to include a `routeNotificationForSms()` method, which returns a phone number
 or an array of phone numbers.
 
 ```php
-public function routeNotificationForSms()
+public function routeNotificationForSms(\Illuminate\Notifications\Notification $notification = null)
 {
     return $this->phone;
 }
