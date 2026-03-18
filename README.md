@@ -1,14 +1,14 @@
-# Smsc notifications channel for Laravel 10-12
+# Smsc notifications channel for Laravel 10-13
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/laravel-notification-channels/smsc-ru.svg?style=flat-square)](https://packagist.org/packages/edemsky/sms-ru)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Total Downloads](https://img.shields.io/packagist/dt/laravel-notification-channels/smsc-ru.svg?style=flat-square)](https://packagist.org/packages/edemsky/sms-ru)
 
-This package makes it easy to send notifications with Laravel 10-12.
+This package makes it easy to send notifications with Laravel 10-13.
 
 Supported versions:
 
-- Laravel 10-12
+- Laravel 10-13
 - PHP 8.1-8.4
 
 ## Contents
