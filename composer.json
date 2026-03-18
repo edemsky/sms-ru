@@ -1,6 +1,6 @@
 {
     "name": "edemsky/sms-ru",
-    "description": "SMS notifications channel for Laravel 10-12.",
+    "description": "SMS notifications channel for Laravel 10-13.",
     "keywords": ["laravel", "notifications", "smscentre", "sms"],
     "homepage": "https://github.com/edemsky/sms-ru",
     "license": "MIT",
@@ -8,7 +8,7 @@
         {
             "name": "Michael Edemsky",
             "role": "Developer",
-            "email": "edemsky.m@gnail.com",
+            "email": "edemsky.m@gmail.com",
             "homepage": "https://github.com/edemsky"
         }
     ],
@@ -17,9 +17,9 @@
         "ext-json": "*",
         "ext-mbstring": "*",
         "guzzlehttp/guzzle": "^7.5",
-        "illuminate/queue": "^10.0|^11.0|^12.0",
-        "illuminate/notifications": "^10.0|^11.0|^12.0",
-        "illuminate/support": "^10.0|^11.0|^12.0"
+        "illuminate/queue": "^10.0|^11.0|^12.0|^v13.0",
+        "illuminate/notifications": "^10.0|^11.0|^12.0|^v13.0",
+        "illuminate/support": "^10.0|^11.0|^12.0|^v13.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^10.5 || ^11.0",
